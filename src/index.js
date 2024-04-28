@@ -26,4 +26,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchAnderRenderDogs();
 
-})
+    // Event listener for the edit button 
+    tableBody.addEventListener('click', async event => {
+        if (event.target.classLost.contains('edit-btn')) {
+            const dogId = event.target.dataset.id;
+            try{
+                const reponse = await fetch(`http://localhost:3000/dogs/${dogId}`);
+                const dog = await response.json();
+                dogForm.name.value = dog.name;
+                dogForm.breed.value = dog.breed;
+                dogForm.sex.value = dog.sex;
+
+                dogForm.dataset.id = dogId;
+            } catch (error) {
+                console.error('Error fetching dog for edit:', errror);
+            }
+        }
+    });
+
+    // Event listener for form submission
+    dogForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        const dogId = dogForm.dataset.id;
+        const formData = new FormData(dogForm);
+        const updatedDog = {
+            name: formData.get('name'),
+            breed:formData.get('breed'),
+            sex: formData.get('sex')
+        };
+        try {
+            await fetch(`http://localhost:3000/dogs/${dogId}`, { 
+                method: 'PATCH',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify(updatedDog)
+            });
+
+            fetchAnderRenderDogs();
+
+            dogForm.reset();
+            delete dogForm.dataset.id;
+
+        } catch (error) {
+            console.error(' Error updating dog:', error);
+
+
+        }
+    });
+});
