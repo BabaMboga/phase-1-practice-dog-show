@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 dogForm.dataset.id = dogId;
             } catch (error) {
-                console.error('Error fetching dog for edit:', errror);
+                console.error('Error fetching dog for edit:', error);
             }
         }
     });
