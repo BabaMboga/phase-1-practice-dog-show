@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch dogs from the API and render them in the table
     const fetchAndRenderDogs = async () => {
         try {
-            const reponse = await fetch('http://localhost:3000/dogs');
-            const dogs = await Response.json();
+            const response = await fetch('http://localhost:3000/dogs');
+            const dogs = await response.json();
             tableBody.innerHTML = '';
             dogs.forEach(dog => {
                 const row =  document.createElement('tr');
@@ -24,14 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    fetchAnderRenderDogs();
+    fetchAndRenderDogs();
 
     // Event listener for the edit button 
     tableBody.addEventListener('click', async event => {
         if (event.target.classLost.contains('edit-btn')) {
             const dogId = event.target.dataset.id;
             try{
-                const reponse = await fetch(`http://localhost:3000/dogs/${dogId}`);
+                const response = await fetch(`http://localhost:3000/dogs/${dogId}`);
                 const dog = await response.json();
                 dogForm.name.value = dog.name;
                 dogForm.breed.value = dog.breed;
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(updatedDog)
             });
 
-            fetchAnderRenderDogs();
+            fetchAndRenderDogs();
 
             dogForm.reset();
             delete dogForm.dataset.id;
