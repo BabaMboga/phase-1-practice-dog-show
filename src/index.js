@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listener for the edit button 
     tableBody.addEventListener('click', async event => {
-        if (event.target.classLost.contains('edit-btn')) {
+        if (event.target.classList.contains('edit-btn')) {
             const dogId = event.target.dataset.id;
             try{
                 const response = await fetch(`http://localhost:3000/dogs/${dogId}`);
