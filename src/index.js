@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch dogs from the API and render them in the table
     const fetchAndRenderDogs = async () => {
         try {
-            const response = await fetch('http://localhost:3000/dogs');
+            const response = await fetch('https://pseudo-data.onrender.com/dogs');
             const dogs = await response.json();
             tableBody.innerHTML = '';
             dogs.forEach(dog => {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('edit-btn')) {
             const dogId = event.target.dataset.id;
             try{
-                const response = await fetch(`http://localhost:3000/dogs/${dogId}`);
+                const response = await fetch(`https://pseudo-data.onrender.com/dogs/${dogId}`);
                 const dog = await response.json();
                 dogForm.name.value = dog.name;
                 dogForm.breed.value = dog.breed;
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sex: formData.get('sex')
         };
         try {
-            await fetch(`http://localhost:3000/dogs/${dogId}`, { 
+            await fetch(`https://pseudo-data.onrender.com/dogs/${dogId}`, { 
                 method: 'PATCH',
                 headers : {
                     'Content-Type' : 'application/json'
